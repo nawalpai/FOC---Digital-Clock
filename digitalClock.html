@@ -1,68 +1,43 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Simple Form</title>
-  <script>
-    function validateForm() {
-      const username = document.getElementById("username").value.trim();
-      const password = document.getElementById("password").value.trim();
-      const gender = document.querySelector('input[name="gender"]:checked');
-      const birthdate = document.getElementById("birthdate").value;
-      const country = document.getElementById("country").value;
-      const agree = document.getElementById("Agree").checked;
-
-      // Username validation
-      if (username.length < 3) {
-        alert("Username must be at least 3 characters long.");
-        return false;
-      }
-
-      // Password validation
-      if (password.length < 6) {
-        alert("Password must be at least 6 characters long.");
-        return false;
-      }
-
-      // General field validation
-      if (!gender || birthdate === "" || country === "" || !agree) {
-        alert("Please complete all fields and agree to the terms.");
-        return false;
-      }
-
-      alert("Form submitted successfully!");
-      return true;
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Digital Clock</title>
+  <style>
+    body {
+      background-color: black;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      font-family: 'Courier New', Courier, monospace;
+      margin: 0;
     }
-  </script>
+    .clock {
+      font-size: 5rem;
+      padding: 2rem;
+      border: 4px solid rgb(221, 223, 221);
+      border-radius: 10px;
+      
+    }
+  </style>
 </head>
 <body>
-  <h1>Simple Form</h1>
-  <form onsubmit="return validateForm()" action="#">
-    <label for="username">Enter your username</label><br><br>
-    <input type="text" id="username" name="username"><br><br>
+  <div class="clock" id="clock">00:00:00</div>
 
-    <label for="password">Password</label><br><br>
-    <input type="password" id="password" name="password"><br><br>
+  <script>
+    function updateClock() {
+      const now = new Date();
+      let hours = now.getHours().toString().padStart(2, '0');
+      let minutes = now.getMinutes().toString().padStart(2, '0');
+      let seconds = now.getSeconds().toString().padStart(2, '0');
+      document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds}`;
+    }
 
-    <label for="male">Male</label>
-    <input type="radio" id="male" name="gender" value="male">
-    <label for="female">Female</label>
-    <input type="radio" id="female" name="gender" value="female"><br><br>
-
-    <label for="birthdate">Select your birthdate</label><br><br>
-    <input type="date" id="birthdate" name="birthdate"><br><br>
-
-    <label for="country">Country</label>
-    <select id="country" name="country">
-      <option value="">Select</option>
-      <option value="USA">USA</option>
-      <option value="UK">UK</option>
-      <option value="India">India</option>
-    </select><br><br>
-
-    <input type="checkbox" id="Agree" name="Agree">
-    <label for="Agree">I agree to the terms and conditions</label><br><br>
-
-    <button type="submit">Submit</button>
-  </form>
+    setInterval(updateClock, 1000);
+    updateClock(); // initial call to display immediately
+  </script>
 </body>
 </html>
