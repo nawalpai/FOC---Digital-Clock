@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Simple Form</title>
+  <script>
+    function validateForm() {
+      const username = document.getElementById("username").value.trim();
+      const password = document.getElementById("password").value.trim();
+      const gender = document.querySelector('input[name="gender"]:checked');
+      const birthdate = document.getElementById("birthdate").value;
+      const country = document.getElementById("country").value;
+      const agree = document.getElementById("Agree").checked;
+
+      // Username validation
+      if (username.length < 3) {
+        alert("Username must be at least 3 characters long.");
+        return false;
+      }
+
+      // Password validation
+      if (password.length < 6) {
+        alert("Password must be at least 6 characters long.");
+        return false;
+      }
+
+      // General field validation
+      if (!gender || birthdate === "" || country === "" || !agree) {
+        alert("Please complete all fields and agree to the terms.");
+        return false;
+      }
+
+      alert("Form submitted successfully!");
+      return true;
+    }
+  </script>
+</head>
+<body>
+  <h1>Simple Form</h1>
+  <form onsubmit="return validateForm()" action="#">
+    <label for="username">Enter your username</label><br><br>
+    <input type="text" id="username" name="username"><br><br>
+
+    <label for="password">Password</label><br><br>
+    <input type="password" id="password" name="password"><br><br>
+
+    <label for="male">Male</label>
+    <input type="radio" id="male" name="gender" value="male">
+    <label for="female">Female</label>
+    <input type="radio" id="female" name="gender" value="female"><br><br>
+
+    <label for="birthdate">Select your birthdate</label><br><br>
+    <input type="date" id="birthdate" name="birthdate"><br><br>
+
+    <label for="country">Country</label>
+    <select id="country" name="country">
+      <option value="">Select</option>
+      <option value="USA">USA</option>
+      <option value="UK">UK</option>
+      <option value="India">India</option>
+    </select><br><br>
+
+    <input type="checkbox" id="Agree" name="Agree">
+    <label for="Agree">I agree to the terms and conditions</label><br><br>
+
+    <button type="submit">Submit</button>
+  </form>
+</body>
+</html>
